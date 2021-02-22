@@ -1,23 +1,21 @@
 import { Link } from 'react-router-dom';
+import bicycle from '../assets/img/bicycle.png';
 
 const Home = () => (
   <div className="d-flex justify-content-center align-items-center ">
+    <img src={bicycle} alt="" />
     <div className="homepage-text ">
-      <h1>
-        Welcome to Pokedex
-      </h1>
       <p>
-        A place where you can find all information
-
+        Explore a wide variety of
         <br />
-
-        about pokemons
+        bicycles for every need.
       </p>
-      <Link to="/pokemons" className="btn btn-warning ">
-        View All pokemons
+      <Link to="/bicycles" className="btn btn-primary">
+        View All Bicycles
       </Link>
 
     </div>
+
   </div>
 );
 
