@@ -3,14 +3,18 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { useHistory, Link } from 'react-router-dom';
 import changeLoggedUser from '../../redux/actions/auth_actions';
 
-const Signup = ({ changeLoggedUser }) => {
+const Signup = ({ authData, changeLoggedUser }) => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
-
+  const history = useHistory();
+  if (authData.loggedIn === true) {
+    history.push('/');
+  }
   const handleSubmit = e => {
     e.preventDefault();
     axios.post('http://localhost:5000/api/v1/users', {
@@ -32,9 +36,9 @@ const Signup = ({ changeLoggedUser }) => {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center form-container container">
-      <form onSubmit={handleSubmit} className="login-form d-flex flex-column text-center">
-        <h2 className="text-white">Login</h2>
+    <div className="d-flex justify-content-center align-items-center form-container container pb-4">
+      <form onSubmit={handleSubmit} className="login-form d-flex flex-column text-center mb-5">
+        <h2 className="text-white">Signup</h2>
         <div className="form-input-material d-flex flex-column align-items-start">
           <label htmlFor="name">Name</label>
           <input type="text" id="name" name="name" className="form-control-material w-100" autoComplete="off" value={name} onChange={e => { setName(e.target.value); }} required placeholder="Name" />
@@ -52,17 +56,18 @@ const Signup = ({ changeLoggedUser }) => {
           <label htmlFor="passwordConfirmation">Password</label>
           <input type="password" id="passwordConfirmation" name="passwordConfirmation" className="form-control-material w-100" value={passwordConfirmation} onChange={e => { setPasswordConfirmation(e.target.value); }} required placeholder="Re-enter your password" />
         </div>
-        <button className="btn btn-primary btn-ghost" type="submit">Login</button>
+        <button className="btn btn-primary btn-ghost" type="submit">Signup</button>
+        <Link to="/login" className="mt-3">
+          Login?
+        </Link>
       </form>
+
     </div>
   );
 };
-const mapStateToProps = state => ({
-  authData: state.auth,
-});
 
 const mapDispatchToProps = dispatch => ({
   changeLoggedUser:
     (user, loggedIn, userOrders) => dispatch(changeLoggedUser(user, loggedIn, userOrders)),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default connect(null, mapDispatchToProps)(Signup);

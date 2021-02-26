@@ -19,19 +19,16 @@ const Logout = ({ changeLoggedUser }) => {
       console.log(error);
     });
   return (
-    <h1>
-      logging out
-    </h1>
+    <div className="my-5 py-5 text-center">
+      <h1>
+        logging out
+      </h1>
+    </div>
   );
 };
-
-const mapStateToProps = state => ({
-  authData: state.auth,
-
-});
 
 const mapDispatchToProps = dispatch => ({
   changeLoggedUser:
     (user, loggedIn, userOrders) => dispatch(changeLoggedUser(user, loggedIn, userOrders)),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(Logout);
+export default connect(null, mapDispatchToProps)(Logout);

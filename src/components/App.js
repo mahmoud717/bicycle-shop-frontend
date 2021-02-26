@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
@@ -14,6 +15,10 @@ import Login from '../containers/auth/login';
 import Logout from '../containers/auth/logout';
 import Signup from '../containers/auth/sign_up';
 import BicycleList from '../containers/bicycles/bicycleList';
+import Bicycle from '../containers/bicycles/Bicycle';
+import NewOrder from '../containers/orders/NewOrder';
+import Success from '../containers/orders/Success';
+import User from '../containers/users/User';
 
 function App({ authData, changeLoggedUser }) {
   useEffect(() => {
@@ -29,30 +34,41 @@ function App({ authData, changeLoggedUser }) {
   }, []);
   return (
     <BrowserRouter>
-      <Navbar loggedIn={authData.loggedIn} userName={authData.user.name} />
+      <Navbar loggedIn={authData.loggedIn} userName={authData.user.name} userId={authData.user.id} />
       <div className="App m-0">
         <Switch>
-
+          <Route exact path="/users/:id">
+            <User authData={authData} />
+          </Route>
           <Route exact path="/login">
-            <Login />
+            <Login authData={authData} />
           </Route>
           <Route exact path="/signup">
-            <Signup />
+            <Signup authData={authData} />
           </Route>
           <Route exact path="/">
-            <Home />
+            <Home authData={authData} />
           </Route>
           <Route exact path="/bicycles">
-            <BicycleList />
+            <BicycleList authData={authData} />
           </Route>
           <Route exact path="/logout">
-            <Logout />
+            <Logout authData={authData} />
           </Route>
           <Route exact path="/about">
-            <About />
+            <About authData={authData} />
+          </Route>
+          <Route exact path="/bicycles/:id">
+            <Bicycle authData={authData} />
+          </Route>
+          <Route exact path="/orders/success">
+            <Success authData={authData} />
+          </Route>
+          <Route exact path="/orders/new/:id">
+            <NewOrder authData={authData} />
           </Route>
           <Route exact path="*">
-            <NotFound />
+            <NotFound authData={authData} />
           </Route>
 
         </Switch>

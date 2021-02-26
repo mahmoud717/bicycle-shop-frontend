@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 // import { connect } from 'react-redux';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default function BicycleList() {
   const [list, changeList] = useState({});
@@ -29,14 +30,17 @@ export default function BicycleList() {
       <div className="bicycle-list d-flex row">
         {list.map(el => (
           <div className="bicycle col-4">
-            <div className="bicycle-card">
-              <div className="bicycle-image w-100">
-                <img src={el.image_url} alt="" className="" />
+            <Link to={`bicycles/${el.id}`}>
+              <div className="bicycle-card">
+                <div className="bicycle-image w-100">
+                  <img src={el.image_url} alt="" className="" />
+                </div>
+                <div className="bicycle-name">{el.name}</div>
+                <div className="bicycle-model btn btn-outline-primary">{el.model}</div>
+                {el.description ? (<div className="bicycle-description">{`${el.description.substring(0, 100)}...`}</div>) : ''}
               </div>
-              <div className="bicycle-name">{el.name}</div>
-              <div className="bicycle-model">{el.mode}</div>
-              {el.description ? (<div className="bicycle-description">{`${el.description.substring(0, 100)}...`}</div>) : ''}
-            </div>
+
+            </Link>
           </div>
         ))}
       </div>

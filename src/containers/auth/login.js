@@ -10,6 +10,9 @@ const Login = ({ authData, changeLoggedUser }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
+  if (authData.loggedIn === true) {
+    history.push('/');
+  }
   const handleSubmit = e => {
     e.preventDefault();
     axios.post('http://localhost:5000/api/v1/sessions', {
@@ -17,7 +20,6 @@ const Login = ({ authData, changeLoggedUser }) => {
       email,
     }, { withCredentials: true })
       .then(response => {
-        console.log(response, authData);
         if (response.data.status === 'error') {
           /// handleError()
         }
@@ -53,12 +55,8 @@ const Login = ({ authData, changeLoggedUser }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  authData: state.auth,
-});
-
 const mapDispatchToProps = dispatch => ({
   changeLoggedUser:
   (user, loggedIn, userOrders) => dispatch(changeLoggedUser(user, loggedIn, userOrders)),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(null, mapDispatchToProps)(Login);

@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Link } from 'react-router-dom';
 
-const Navbar = ({ loggedIn, userName }) => (
+const Navbar = ({ loggedIn, userName, userId }) => (
   <nav className="navbar color-white mb-0 ">
     <div className="container-fluid">
       <div className="d-flex align-items-center nav-left">
@@ -14,7 +14,7 @@ const Navbar = ({ loggedIn, userName }) => (
           About
         </Link>
         {userName ? (
-          <Link>
+          <Link to={`/users/${userId}`}>
             {userName.charAt(0).toUpperCase() + userName.slice(1)}
           </Link>
         ) : '' }
