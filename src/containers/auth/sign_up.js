@@ -11,6 +11,7 @@ const Signup = ({ authData, changeLoggedUser }) => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
   const history = useHistory();
   if (authData.loggedIn === true) {
     history.push('/');
@@ -21,13 +22,15 @@ const Signup = ({ authData, changeLoggedUser }) => {
       name,
       password,
       email,
+      image_url: imageUrl,
       password_confirmation: passwordConfirmation,
     }, { withCredentials: true })
       .then(response => {
         if (response.data.status === 'error') {
           /// handleError()
         } else {
-          changeLoggedUser(response.data.user, response.data.logged_in, response.data.orders);
+          changeLoggedUser(response.data.user, true, []);
+          history.push('/');
         }
       })
       .catch(error => {
@@ -55,6 +58,11 @@ const Signup = ({ authData, changeLoggedUser }) => {
         <div className="form-input-material d-flex flex-column align-items-start">
           <label htmlFor="passwordConfirmation">Password</label>
           <input type="password" id="passwordConfirmation" name="passwordConfirmation" className="form-control-material w-100" value={passwordConfirmation} onChange={e => { setPasswordConfirmation(e.target.value); }} required placeholder="Re-enter your password" />
+        </div>
+
+        <div className="form-input-material d-flex flex-column align-items-start">
+          <label htmlFor="imageUrl">Image URL</label>
+          <input type="password" id="imageUrl" name="imageUrl" className="form-control-material w-100" value={imageUrl} onChange={e => { setImageUrl(e.target.value); }} placeholder="Image URL" />
         </div>
         <button className="btn btn-primary btn-ghost" type="submit">Signup</button>
         <Link to="/login" className="mt-3">

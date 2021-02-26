@@ -196,3 +196,39 @@ input:focus {
   margin: 60px;
   text-align: center;
 }
+
+.user-image {
+  width: 300px;
+  margin-bottom: 40px;
+}
+
+.user-image img {
+  border-radius: 50%;
+}
+
+.user-name {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.order-card {
+  padding: 30px;
+  margin: 20px;
+  border: 1px solid rgba(190, 190, 190, 0.479);
+  border-radius: 5px;
+}
+
+.order-card-name {
+  font-weight: 500;
+}
+
+.order-card-image {
+  width: 130px;
+  margin-right: 40px;
+}
+
+.no-orders {
+  font-size: 30px;
+  font-weight: 500;
+  margin-top: 130px;
+}

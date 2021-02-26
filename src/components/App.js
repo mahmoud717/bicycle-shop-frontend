@@ -14,11 +14,12 @@ import '../index.css';
 import Login from '../containers/auth/login';
 import Logout from '../containers/auth/logout';
 import Signup from '../containers/auth/sign_up';
-import BicycleList from '../containers/bicycles/bicycleList';
-import Bicycle from '../containers/bicycles/Bicycle';
+import BicycleList from './bicycles/bicycleList';
+import Bicycle from './bicycles/Bicycle';
 import NewOrder from '../containers/orders/NewOrder';
-import Success from '../containers/orders/Success';
+import Success from './orders/Success';
 import User from '../containers/users/User';
+import UserOrders from '../containers/users/UserOrders';
 
 function App({ authData, changeLoggedUser }) {
   useEffect(() => {
@@ -26,6 +27,7 @@ function App({ authData, changeLoggedUser }) {
       .then(response => {
         if (response.data) {
           changeLoggedUser(response.data.user, response.data.logged_in, response.data.orders);
+          console.log(response.data);
         }
       })
       .catch(error => {
@@ -66,6 +68,9 @@ function App({ authData, changeLoggedUser }) {
           </Route>
           <Route exact path="/orders/new/:id">
             <NewOrder authData={authData} />
+          </Route>
+          <Route exact path="/users/:id/orders">
+            <UserOrders authData={authData} />
           </Route>
           <Route exact path="*">
             <NotFound authData={authData} />

@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable eqeqeq */
 /* eslint-disable react/prop-types */
 /* eslint-disable array-callback-return */
 /* eslint-disable max-len */
@@ -9,8 +7,8 @@ import { useParams, useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import Option from './Option';
-import OptionFieldset from './OptionFieldset';
+import Option from '../../components/orders/Option';
+import OptionFieldset from '../../components/orders/OptionFieldset';
 
 const NewOrder = ({ authData }) => {
   const { id } = useParams();
@@ -49,7 +47,7 @@ const NewOrder = ({ authData }) => {
     const newOptions = options.filter(option => {
       if (option.key <= options[(options.length - 1)].props.id) {
         if (options[(options.length - 1)].props.name === option.props.name) {
-          if (options[(options.length - 1)] == option) { return option; }
+          if (options[(options.length - 1)] === option) { return option; }
         }
         if (options[(options.length - 1)].props.name !== option.props.name) {
           return option;
@@ -66,16 +64,15 @@ const NewOrder = ({ authData }) => {
     const radios = document.getElementsByTagName('input');
     let selectedOptions = {};
     for (let i = 0; i < radios.length; i += 1) {
-      if (radios[i].type == 'radio' && radios[i].checked) {
+      if (radios[i].type === 'radio' && radios[i].checked) {
         selectedOptions = { ...selectedOptions, [radios[i].name]: radios[i].value };
       }
     }
-    console.log(authData);
     axios({
       method: 'post',
       url: 'http://localhost:5000/api/v1/orders',
       data: {
-        user_id: authData.authData.user.id,
+        user_id: authData.user.id,
         bicycle_id: id,
         product_name: bicycle.name,
         product_image_url: bicycle.image_url,
@@ -98,7 +95,7 @@ const NewOrder = ({ authData }) => {
         <div className="bicycle-container-name">{bicycle.name}</div>
         <div className="bicycle-container-description">{bicycle.description}</div>
         <div>
-          <h1>Place order</h1>
+          <h2>Place order</h2>
           <form id="OrderForm">
             <div className="order-options">
               {options.length !== 0 ? options.map(option => option) : ''}
