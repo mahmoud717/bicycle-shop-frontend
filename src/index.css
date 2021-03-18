@@ -27,7 +27,7 @@ code {
 }
 
 nav {
-  height: 100px;
+  min-height: 100px;
   padding: 0 50px;
   font-family: 'Montserrat', sans-serif;
   text-decoration: none;
@@ -57,22 +57,18 @@ nav a {
   text-decoration: none !important;
 }
 
-nav a:hover {
+nav a:hover,
+.nav li a:hover {
   color: #0d6efd;
+  text-decoration: none;
   cursor: pointer;
 }
 
-nav img {
-  height: 50px !important;
-  margin-right: 8px;
-}
-
-.homepage-background {
-  height: 800px !important;
+.main-image {
+  height: 340px;
 }
 
 .homepage-text {
-  margin-left: 70px;
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -159,7 +155,6 @@ input:focus {
 }
 
 .bicycle-container-image {
-  width: 40vw;
   margin: 50px 0;
   position: relative;
 }
@@ -241,4 +236,18 @@ input:focus {
 
 .bicycle-form > div {
   margin: 20px 0;
+}
+
+@media (min-width: 768px) {
+  .bicycle-container-image {
+    width: 40vw !important;
+  }
+
+  .main-image {
+    height: 600px;
+  }
+
+  .homepage-text {
+    margin-left: 70px;
+  }
 }

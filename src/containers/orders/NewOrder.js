@@ -97,7 +97,7 @@ const NewOrder = ({ authData, changeUserOrders }) => {
 
   return (
 
-    <div className="container-fluid">
+    <div className="container-fluid p-3">
       <div className="bicycle-container container d-flex flex-column justify-content-center align-items-center">
         <div className="bicycle-container-image">
           <div className="bicycle-container-model btn btn-outline-primary">{bicycle.model}</div>
@@ -108,9 +108,9 @@ const NewOrder = ({ authData, changeUserOrders }) => {
         <div>
           <h2>Place order</h2>
           {/* looping through react elements and displaying them by order */}
-          <form id="OrderForm">
+          <form id="OrderForm" onSubmit={handleSubmit}>
             { elements && elements.map(el => el)}
-            <input type="submit" onClick={handleSubmit} value="Create order" className="btn btn-primary" />
+            <input type="submit" value="Create order" className="btn btn-primary" />
           </form>
         </div>
       </div>

@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 import bicycle from '../assets/img/bicycle.png';
 
 const Home = () => (
-  <div className="d-flex justify-content-center align-items-center ">
-    <img src={bicycle} alt="" />
-    <div className="homepage-text ">
+  <div className="d-flex flex-column flex-lg-row justify-content-center align-items-center ">
+    <img src={bicycle} alt="" className="main-image" />
+    <div className="homepage-text d-flex flex-column mt-4 mt-md-0 justify-content-center">
       <p>
         Explore a wide variety of
         <br />
