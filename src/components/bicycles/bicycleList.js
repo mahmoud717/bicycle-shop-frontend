@@ -13,10 +13,10 @@ export default function BicycleList({ authData }) {
         if (response.data) {
           changeList(response.data.bicycles);
         }
-      })
-      .catch(error => {
-        console.error(error);
       });
+    // .catch(error => {
+    //   console.error(error);
+    // });
   }, []);
   if (list === '') {
     return (

@@ -33,10 +33,10 @@ const Signup = ({ authData, changeLoggedUser }) => {
           localStorage.setItem('token', response.data.token);
           history.push('/');
         }
-      })
-      .catch(error => {
-        console.log(error);
       });
+    // .catch(error => {
+    //   console.log(error);
+    // });
   };
 
   return (
