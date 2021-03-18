@@ -12,6 +12,7 @@ const Signup = ({ authData, changeLoggedUser }) => {
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [error, setError] = useState(null);
   const history = useHistory();
   if (authData.loggedIn === true) {
     history.push('/');
@@ -27,7 +28,7 @@ const Signup = ({ authData, changeLoggedUser }) => {
     })
       .then(response => {
         if (response.data.status === 'error') {
-          /// handleError()
+          setError(response.data.message[0]);
         } else {
           changeLoggedUser(response.data.user, true, []);
           localStorage.setItem('token', response.data.token);
@@ -43,6 +44,7 @@ const Signup = ({ authData, changeLoggedUser }) => {
     <div className="d-flex justify-content-center align-items-center form-container container pb-4">
       <form onSubmit={handleSubmit} className="login-form d-flex flex-column text-center mb-5">
         <h2 className="text-white">Signup</h2>
+        <div className="text-white">{error}</div>
         <div className="form-input-material d-flex flex-column align-items-start">
           <label htmlFor="name">Name</label>
           <input type="text" id="name" name="name" className="form-control-material w-100" autoComplete="off" value={name} onChange={e => { setName(e.target.value); }} required placeholder="Name" />
@@ -65,6 +67,7 @@ const Signup = ({ authData, changeLoggedUser }) => {
           <label htmlFor="imageUrl">Image URL</label>
           <input type="text" id="imageUrl" name="imageUrl" className="form-control-material w-100" value={imageUrl} onChange={e => { setImageUrl(e.target.value); }} placeholder="Image URL" />
         </div>
+
         <button className="btn btn-primary btn-ghost" type="submit">Signup</button>
         <Link to="/login" className="mt-3">
           Login?
