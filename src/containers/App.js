@@ -25,6 +25,7 @@ import User from './users/User';
 import UserOrders from './users/UserOrders';
 import CreateBicycle from './users/admin/CreateBicycle';
 import AddOptions from './users/admin/addOptions';
+import UserFavorites from './users/UserFavourites';
 
 function App({ authData, changeLoggedUser }) {
   useEffect(() => {
@@ -90,6 +91,10 @@ function App({ authData, changeLoggedUser }) {
           <Route exact path="/users/:id/orders">
             <UserOrders authData={authData} />
           </Route>
+          <Route exact path="/users/:id/favorites">
+            <UserFavorites authData={authData} />
+          </Route>
+
           <Route exact path="*">
             <NotFound authData={authData} />
           </Route>

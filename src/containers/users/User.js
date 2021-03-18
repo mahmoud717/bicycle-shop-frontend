@@ -56,6 +56,9 @@ const User = ({ authData, changeLoggedUser }) => {
           <button type="button" className="btn btn-primary m-3" onClick={handleClick}>
             orders
           </button>
+          <Link to={`/users/${authData.user.id}/favorites`}>
+            favorites
+          </Link>
           {authData.user.admin === true ? <Link to="/bicycles/create" className="btn btn-success m-3">Add product</Link> : ''}
 
         </div>
