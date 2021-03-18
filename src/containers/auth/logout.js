@@ -7,11 +7,11 @@ import changeLoggedUser from '../../redux/actions/auth_actions';
 
 const Logout = ({ changeLoggedUser }) => {
   const history = useHistory();
-  axios.delete('http://localhost:5000/api/v1/sessions/logout', { withCredentials: true })
+  axios.delete('http://localhost:5000/api/v1/sessions/logout')
     .then(response => {
       if (response.data) {
         changeLoggedUser({}, false, {});
-
+        localStorage.clear();
         history.push('/');
       }
     })

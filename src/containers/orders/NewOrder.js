@@ -1,31 +1,42 @@
+/* eslint-disable prefer-const */
 /* eslint-disable react/prop-types */
 /* eslint-disable array-callback-return */
 /* eslint-disable max-len */
 /* eslint-disable consistent-return */
-/* eslint-disable react/jsx-key */
+
 import { useParams, useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-
-import Option from '../../components/orders/Option';
+import { connect } from 'react-redux';
 import OptionFieldset from '../../components/orders/OptionFieldset';
+import changeUserOrders from '../../redux/actions/order_actions';
 
-const NewOrder = ({ authData }) => {
+const NewOrder = ({ authData, changeUserOrders }) => {
   const { id } = useParams();
-  const [bicycle, changeBicycle] = useState({});
-  const [options, changeOptions] = useState([]);
+  const [bicycle, setBicycle] = useState({});
+  const [originalOptions, setOriginalOptions] = useState([]);
+  const [displayedOptions, setDisplayedOptions] = useState([]);
+  const [elements, setElements] = useState([]);
   const history = useHistory();
-  // option adding
-  const addFieldset = optionsArray => {
-    if (optionsArray.length !== 0) {
-      const fieldsetDiv = [];
 
-      optionsArray.map(option => {
-        fieldsetDiv.push(<Option id={option.option_id} name={option.option_name} value={option.option_value} onClick={addFieldset} options={option.sub_options} />);
-      });
-
-      changeOptions(oldOptions => [...oldOptions, <OptionFieldset name={optionsArray[0].option_name} options={fieldsetDiv} id={optionsArray[0].option_level} />]);
+  // adding options to the displayed options list
+  const addOptions = (level, parentId, originalOptions) => {
+    // checking if there are option with the same level or higher and removing them from the displayed options list
+    if (displayedOptions.length) {
+      setDisplayedOptions(displayedOptions.filter(item => {
+        if (item[0] && item[0].level < level) {
+          return item;
+        }
+      }));
     }
+    // adding new options to the displayed options list on select
+    let fieldsetArray = [];
+    originalOptions.map(option => {
+      if (option.level === level && option.parent_id === parentId) {
+        fieldsetArray.push(option);
+      }
+    });
+    setDisplayedOptions(oldOptions => [...oldOptions, fieldsetArray]);
   };
 
   // fetching bike data
@@ -33,29 +44,25 @@ const NewOrder = ({ authData }) => {
     axios.get(`http://localhost:5000/api/v1/bicycles/${id}`)
       .then(response => {
         if (response.data) {
-          changeBicycle(response.data);
-          addFieldset(response.data.options.options, 0);
+          setBicycle(response.data.bicycle);
+          setOriginalOptions(response.data.options);
+          addOptions(1, null, response.data.options);
         }
       })
-      .catch(error => {
-        console.error(error);
+      .then(() => {
+
       });
   }, []);
 
-  // options filtering
+  // converting the items in the displayed options list to react elements
   useEffect(() => {
-    const newOptions = options.filter(option => {
-      if (option.key <= options[(options.length - 1)].props.id) {
-        if (options[(options.length - 1)].props.name === option.props.name) {
-          if (options[(options.length - 1)] === option) { return option; }
-        }
-        if (options[(options.length - 1)].props.name !== option.props.name) {
-          return option;
-        }
+    setElements([]);
+    displayedOptions.map(optionGroup => {
+      if (optionGroup.length) {
+        setElements(oldElements => [...oldElements, <OptionFieldset key={optionGroup[0].name} options={optionGroup} onClick={addOptions} originalOptions={originalOptions} name={optionGroup[0].name} />]);
       }
     });
-    changeOptions(newOptions);
-  }, [options.length]);
+  }, [displayedOptions]);
 
   // submission handling
 
@@ -68,6 +75,7 @@ const NewOrder = ({ authData }) => {
         selectedOptions = { ...selectedOptions, [radios[i].name]: radios[i].value };
       }
     }
+
     axios({
       method: 'post',
       url: 'http://localhost:5000/api/v1/orders',
@@ -79,8 +87,11 @@ const NewOrder = ({ authData }) => {
         options: selectedOptions,
       },
     })
-      .then(() => {
-        history.push('/orders/success');
+      .then(response => {
+        if (response.data.status === 'success') {
+          changeUserOrders(response.data.orders);
+          history.push('/orders/success');
+        }
       });
   };
 
@@ -96,11 +107,10 @@ const NewOrder = ({ authData }) => {
         <div className="bicycle-container-description">{bicycle.description}</div>
         <div>
           <h2>Place order</h2>
+          {/* looping through react elements and displaying them by order */}
           <form id="OrderForm">
-            <div className="order-options">
-              {options.length !== 0 ? options.map(option => option) : ''}
-            </div>
-            <button type="submit" onClick={handleSubmit} className="btn btn-primary">Create order</button>
+            { elements && elements.map(el => el)}
+            <input type="submit" onClick={handleSubmit} value="Create order" className="btn btn-primary" />
           </form>
         </div>
       </div>
@@ -109,4 +119,7 @@ const NewOrder = ({ authData }) => {
   );
 };
 
-export default NewOrder;
+const mapDispatchToProps = dispatch => ({
+  changeUserOrders: orders => dispatch(changeUserOrders(orders)),
+});
+export default connect(null, mapDispatchToProps)(NewOrder);

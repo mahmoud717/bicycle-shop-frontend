@@ -1,18 +1,41 @@
+/* eslint-disable no-alert */
+/* eslint-disable no-undef */
+/* eslint-disable no-restricted-globals */
+/* eslint-disable max-len */
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios';
+import { connect } from 'react-redux';
 
-const User = ({ authData }) => {
+const User = ({ authData, changeLoggedUser }) => {
   const history = useHistory();
 
-  useEffect(() => {
-    if (!authData.loggedIn) {
-      history.push('/');
-    }
-  }, []);
+  if (authData && !authData.loading && !authData.loggedIn) {
+    history.push('/');
+  }
 
   const handleClick = () => {
     history.push(`/users/${authData.user.id}/orders`);
+  };
+
+  const handelDeletion = e => {
+    e.preventDefault();
+    if (confirm('Are you sure you want to delete this Account?')) {
+      axios.delete(`http://localhost:5000/api/v1/users/${authData.user.id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `bearer ${localStorage.getItem('token')}`,
+        },
+      })
+        .then(response => {
+          if (response.data.status === 'success') {
+            changeLoggedUser({}, false, {});
+            localStorage.clear();
+            history.push('/');
+          }
+        });
+    }
   };
   return (
     <div className="user-container container my-5">
@@ -22,13 +45,21 @@ const User = ({ authData }) => {
 
         </div>
         <div className="user-name">
-          {authData.user.name.charAt(0).toUpperCase() + authData.user.name.slice(1)}
+          {authData.user.name && authData.user.name.charAt(0).toUpperCase() + authData.user.name.slice(1)}
         </div>
         <div className="user-email">
           {authData.user.email}
         </div>
-        <button type="button" className="btn btn-primary mt-5" onClick={handleClick}>
-          orders
+        <div>
+          <button type="button" className="btn btn-primary m-3" onClick={handleClick}>
+            orders
+          </button>
+          {authData.user.admin === true ? <Link to="/bicycles/create" className="btn btn-success m-3">Add product</Link> : ''}
+
+        </div>
+
+        <button type="button" className="btn btn-danger " onClick={handelDeletion}>
+          Delete account
         </button>
       </div>
 
@@ -36,4 +67,9 @@ const User = ({ authData }) => {
   );
 };
 
-export default User;
+const mapDispatchToProps = dispatch => ({
+  changeLoggedUser:
+  (user, loggedIn, userOrders, loading) => dispatch(changeLoggedUser(user, loggedIn, userOrders, loading)),
+});
+
+export default connect(null, mapDispatchToProps)(User);

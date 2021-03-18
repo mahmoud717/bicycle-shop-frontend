@@ -5,12 +5,10 @@ import React from 'react';
 
 const UserOrders = ({ authData }) => (
   <div className="container-fluid order-card-container d-flex flex-column justify-content-center align-items-center">
-    {console.log(authData)}
     {authData.loggedIn ? authData.userOrders.length === 0
       ? <div className="no-orders">You don&apos;t have any orders, Make A purchase to make it appear here. </div>
       : authData.userOrders.map(order => (
-
-        <div className="order-card d-flex">
+        <div key={order.id} className="order-card d-flex">
           <div className="order-card-image">
             <img src={order.product_image_url} alt="" className="w-100" />
           </div>

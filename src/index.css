@@ -155,6 +155,7 @@ input:focus {
 
 .bicycle-description {
   color: #999;
+  word-wrap: break-word;
 }
 
 .bicycle-container-image {
@@ -231,4 +232,13 @@ input:focus {
   font-size: 30px;
   font-weight: 500;
   margin-top: 130px;
+}
+
+.bicycle-form {
+  min-width: 800px;
+  margin-top: 70px;
+}
+
+.bicycle-form > div {
+  margin: 20px 0;
 }

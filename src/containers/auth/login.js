@@ -18,13 +18,14 @@ const Login = ({ authData, changeLoggedUser }) => {
     axios.post('http://localhost:5000/api/v1/sessions', {
       password,
       email,
-    }, { withCredentials: true })
+    })
       .then(response => {
         if (response.data.status === 'error') {
           /// handleError()
         }
         if (response.data.status === 'created') {
           changeLoggedUser(response.data.user, response.data.logged_in, response.data.orders);
+          localStorage.setItem('token', response.data.token);
           history.push('/');
         }
       })

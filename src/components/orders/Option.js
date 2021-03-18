@@ -3,13 +3,12 @@
 import React from 'react';
 
 export default function Option({
-  name, value, onClick, options,
+  option, onClick, originalOptions,
 }) {
   return (
-
-    <div>
-      <label name={name} id={name}>{value}</label>
-      <input type="radio" onChange={() => { onClick(options); }} name={name} value={value} required />
+    <div key={option.id}>
+      <label name={option.name} id={option.id}>{option.value}</label>
+      <input type="radio" onChange={() => { onClick(option.level + 1, option.id, originalOptions); }} name={option.name} value={option.value} required />
     </div>
 
   );

@@ -1,32 +1,42 @@
 /* eslint-disable max-len */
 /* eslint-disable no-console */
 /* eslint-disable react/prop-types */
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter, Route, Switch,
+} from 'react-router-dom';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+
 import changeLoggedUser from '../redux/actions/auth_actions';
-import About from './about';
-import Navbar from './navbar';
-import NotFound from './404';
-import Home from './home';
+import About from '../components/about';
+import Navbar from '../components/navbar';
+import NotFound from '../components/404';
+import Home from '../components/home';
 import '../index.css';
-import Login from '../containers/auth/login';
-import Logout from '../containers/auth/logout';
-import Signup from '../containers/auth/sign_up';
-import BicycleList from './bicycles/bicycleList';
-import Bicycle from './bicycles/Bicycle';
-import NewOrder from '../containers/orders/NewOrder';
-import Success from './orders/Success';
-import User from '../containers/users/User';
-import UserOrders from '../containers/users/UserOrders';
+import Login from './auth/login';
+import Logout from './auth/logout';
+import Signup from './auth/sign_up';
+import BicycleList from '../components/bicycles/bicycleList';
+import Bicycle from '../components/bicycles/Bicycle';
+import NewOrder from './orders/NewOrder';
+import Success from '../components/orders/Success';
+import User from './users/User';
+import UserOrders from './users/UserOrders';
+import CreateBicycle from './users/admin/CreateBicycle';
+import AddOptions from './users/admin/addOptions';
 
 function App({ authData, changeLoggedUser }) {
   useEffect(() => {
-    axios.get('http://localhost:5000/api/v1/sessions/logged_in', { withCredentials: true })
+    axios.get('http://localhost:5000/api/v1/sessions/logged_in', {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `bearer ${localStorage.getItem('token')}`,
+      },
+    })
       .then(response => {
         if (response.data) {
-          changeLoggedUser(response.data.user, response.data.logged_in, response.data.orders);
+          changeLoggedUser(response.data.user, response.data.logged_in, response.data.orders, false);
           console.log(response.data);
         }
       })
@@ -34,6 +44,7 @@ function App({ authData, changeLoggedUser }) {
         console.error(error);
       });
   }, []);
+
   return (
     <BrowserRouter>
       <Navbar loggedIn={authData.loggedIn} userName={authData.user.name} userId={authData.user.id} />
@@ -59,6 +70,13 @@ function App({ authData, changeLoggedUser }) {
           </Route>
           <Route exact path="/about">
             <About authData={authData} />
+          </Route>
+
+          <Route exact path="/bicycles/create">
+            <CreateBicycle authData={authData} />
+          </Route>
+          <Route exact path="/bicycles/:id/addOptions">
+            <AddOptions authData={authData} />
           </Route>
           <Route exact path="/bicycles/:id">
             <Bicycle authData={authData} />
@@ -90,6 +108,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   changeLoggedUser:
-  (user, loggedIn, userOrders) => dispatch(changeLoggedUser(user, loggedIn, userOrders)),
+  (user, loggedIn, userOrders, loading) => dispatch(changeLoggedUser(user, loggedIn, userOrders, loading)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(App);
