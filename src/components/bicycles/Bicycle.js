@@ -12,7 +12,7 @@ const Bicycle = ({ authData }) => {
 
   // fetch bike data
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/v1/bicycles/${id}`)
+    axios.get(`https://bicycle-shop-backend.herokuapp.com/api/v1/bicycles/${id}`)
       .then(response => {
         if (response.data) {
           changeBicycle(response.data.bicycle);
@@ -25,7 +25,7 @@ const Bicycle = ({ authData }) => {
   const handelDeletion = e => {
     e.preventDefault();
     if (confirm('Are you sure you want to delete this bike?')) {
-      axios.delete(`http://localhost:5000/api/v1/bicycles/${id}`)
+      axios.delete(`https://bicycle-shop-backend.herokuapp.com/api/v1/bicycles/${id}`)
         .then(response => {
           if (response.data.status === 'success') {
             history.push('/bicycles');

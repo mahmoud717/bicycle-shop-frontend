@@ -41,7 +41,7 @@ const NewOrder = ({ authData, changeUserOrders }) => {
 
   // fetching bike data
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/v1/bicycles/${id}`)
+    axios.get(`https://bicycle-shop-backend.herokuapp.com/api/v1/bicycles/${id}`)
       .then(response => {
         if (response.data) {
           setBicycle(response.data.bicycle);
@@ -78,7 +78,7 @@ const NewOrder = ({ authData, changeUserOrders }) => {
 
     axios({
       method: 'post',
-      url: 'http://localhost:5000/api/v1/orders',
+      url: 'https://bicycle-shop-backend.herokuapp.com/api/v1/orders',
       data: {
         user_id: authData.user.id,
         bicycle_id: id,

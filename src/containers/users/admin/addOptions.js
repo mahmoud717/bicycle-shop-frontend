@@ -20,7 +20,7 @@ const AddOptions = ({ authData }) => {
   }
   const handleSubmit = e => {
     e.preventDefault();
-    axios.post(`http://localhost:5000/api/v1/bicycles/${id}/createOption`, {
+    axios.post(`https://bicycle-shop-backend.herokuapp.com/api/v1/bicycles/${id}/createOption`, {
       name,
       value,
       parent_id: parentId,
@@ -32,7 +32,7 @@ const AddOptions = ({ authData }) => {
       });
   };
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/v1/bicycles/${id}/options`)
+    axios.get(`https://bicycle-shop-backend.herokuapp.com/api/v1/bicycles/${id}/options`)
       .then(response => {
         setOptions(response.data);
       });

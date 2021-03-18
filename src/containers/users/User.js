@@ -22,7 +22,7 @@ const User = ({ authData, changeLoggedUser }) => {
   const handelDeletion = e => {
     e.preventDefault();
     if (confirm('Are you sure you want to delete this Account?')) {
-      axios.delete(`http://localhost:5000/api/v1/users/${authData.user.id}`, {
+      axios.delete(`https://bicycle-shop-backend.herokuapp.com/api/v1/users/${authData.user.id}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `bearer ${localStorage.getItem('token')}`,

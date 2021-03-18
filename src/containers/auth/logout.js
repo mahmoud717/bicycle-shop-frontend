@@ -7,7 +7,7 @@ import changeLoggedUser from '../../redux/actions/auth_actions';
 
 const Logout = ({ changeLoggedUser }) => {
   const history = useHistory();
-  axios.delete('http://localhost:5000/api/v1/sessions/logout')
+  axios.delete('https://bicycle-shop-backend.herokuapp.com/api/v1/sessions/logout')
     .then(response => {
       if (response.data) {
         changeLoggedUser({}, false, {});

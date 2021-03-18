@@ -230,7 +230,8 @@ input:focus {
 }
 
 .bicycle-form {
-  min-width: 800px;
+  padding: 20px;
+  max-width: 800px;
   margin-top: 70px;
 }
 

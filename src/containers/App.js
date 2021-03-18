@@ -28,7 +28,7 @@ import AddOptions from './users/admin/addOptions';
 
 function App({ authData, changeLoggedUser }) {
   useEffect(() => {
-    axios.get('http://localhost:5000/api/v1/sessions/logged_in', {
+    axios.get('https://bicycle-shop-backend.herokuapp.com/api/v1/sessions/logged_in', {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `bearer ${localStorage.getItem('token')}`,
@@ -39,10 +39,10 @@ function App({ authData, changeLoggedUser }) {
           changeLoggedUser(response.data.user, response.data.logged_in, response.data.orders, false);
           console.log(response.data);
         }
-      })
-      .catch(error => {
-        console.error(error);
       });
+    // .catch(error => {
+    //   console.error(error);
+    // });
   }, []);
 
   return (
