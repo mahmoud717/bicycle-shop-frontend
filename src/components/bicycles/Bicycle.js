@@ -14,7 +14,7 @@ const Bicycle = ({ authData }) => {
   // fetch bike data
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/v1/bicycles/${id}`)
+    axios.get(`https://bicycle-shop-backend.herokuapp.com/api/v1/bicycles/${id}`)
       .then(response => {
         if (response.data) {
           changeBicycle(response.data.bicycle);
@@ -28,7 +28,7 @@ const Bicycle = ({ authData }) => {
   if (!count) {
     if (authData.user.id) {
       setCount(1);
-      axios.get(`http://localhost:5000/api/v1/users/${authData.user.id}/favourites/${id}`)
+      axios.get(`https://bicycle-shop-backend.herokuapp.com/api/v1/users/${authData.user.id}/favourites/${id}`)
         .then(response => {
           if (response.data.status) {
             setFavValue('fas fa-star');
@@ -40,7 +40,7 @@ const Bicycle = ({ authData }) => {
   const handelDeletion = e => {
     e.preventDefault();
     if (confirm('Are you sure you want to delete this bike?')) {
-      axios.delete(`http://localhost:5000/api/v1/bicycles/${id}`)
+      axios.delete(`https://bicycle-shop-backend.herokuapp.com/api/v1/bicycles/${id}`)
         .then(response => {
           if (response.data.status === 'success') {
             history.push('/bicycles');
@@ -66,14 +66,14 @@ const Bicycle = ({ authData }) => {
       history.push('/login');
     }
     if (favValue === 'far fa-star') {
-      axios.post(`http://localhost:5000/api/v1/users/${authData.user.id}/favourites`, {
+      axios.post(`https://bicycle-shop-backend.herokuapp.com/api/v1/users/${authData.user.id}/favourites`, {
         bicycle_id: id,
       })
         .then(() => {
           setFavValue('fas fa-star');
         });
     } else {
-      axios.delete(`http://localhost:5000/api/v1/users/${authData.user.id}/favourites/${id}`)
+      axios.delete(`https://bicycle-shop-backend.herokuapp.com/api/v1/users/${authData.user.id}/favourites/${id}`)
         .then(() => {
           setFavValue('far fa-star');
         });

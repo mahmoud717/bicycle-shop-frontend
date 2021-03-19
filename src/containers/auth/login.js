@@ -16,7 +16,7 @@ const Login = ({ authData, changeLoggedUser }) => {
   }
   const handleSubmit = e => {
     e.preventDefault();
-    axios.post('http://localhost:5000/api/v1/sessions', {
+    axios.post('https://bicycle-shop-backend.herokuapp.com/api/v1/sessions', {
       password,
       email,
     })

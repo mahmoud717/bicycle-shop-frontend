@@ -8,7 +8,7 @@ const UserFavorites = () => {
   //   const history = useHistory();
   const [favorites, setFavorites] = useState([]);
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/v1/users/${id}/favourites`)
+    axios.get(`https://bicycle-shop-backend.herokuapp.com/api/v1/users/${id}/favourites`)
       .then(response => {
         setFavorites(response.data);
       });
