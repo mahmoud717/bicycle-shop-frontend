@@ -81,7 +81,11 @@ const Bicycle = ({ authData }) => {
         });
     }
   };
-
+  if (authData.loading) {
+    return (
+      <h1 className="text-center">loading</h1>
+    );
+  }
   return (
     <div className="container-fluid pb-5">
       <div className="bicycle-container container d-flex flex-column justify-content-center align-items-center mb-5">

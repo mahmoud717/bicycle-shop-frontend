@@ -14,20 +14,25 @@ const UserFavorites = () => {
         setFavorites(response.data);
       });
   }, []);
+  if (!favorites.length) {
+    return (
+      <h1 className="text-center mt-5">There are no favourites</h1>
+    );
+  }
   return (
-    <div>
+    <div className="container-fluid order-card-container d-flex flex-column justify-content-center align-items-center">
       {favorites.map(bike => (
-        <div key={bike.id} className="order-card d-flex">
-          <Link to={`/bicycles/${bike.id}`}>
+        <Link to={`/bicycles/${bike.id}`} key={bike.id}>
+          <div className="order-card d-flex">
             <div className="order-card-image">
-              <img src={bike.product_image_url} alt="" className="w-100" />
+              <img src={bike.image_url} alt="" className="w-100" />
             </div>
             <div className="order-card-details">
-              <div className="order-card-name">{bike.product_name}</div>
+              <div className="order-card-name">{bike.name}</div>
               <div className="order-card-data">{bike.created_at}</div>
             </div>
-          </Link>
-        </div>
+          </div>
+        </Link>
       ))}
     </div>
   );

@@ -39,6 +39,12 @@ const User = ({ authData, changeLoggedUser }) => {
     }
   };
 
+  if (authData.loading) {
+    return (
+      <h1 className="text-center">loading</h1>
+    );
+  }
+
   return (
     <div className="user-container container my-5">
       <div className="user-info d-flex justify-content-center align-items-center flex-column">
@@ -56,7 +62,7 @@ const User = ({ authData, changeLoggedUser }) => {
           <button type="button" className="btn btn-primary m-3" onClick={handleClick}>
             orders
           </button>
-          <Link to={`/users/${authData.user.id}/favorites`}>
+          <Link to={`/users/${authData.user.id}/favorites`} className="btn btn-warning text-white">
             favorites
           </Link>
           {authData.user.admin === true ? <Link to="/bicycles/create" className="btn btn-success m-3">Add product</Link> : ''}

@@ -18,11 +18,9 @@ export default function BicycleList({ authData }) {
     //   console.error(error);
     // });
   }, []);
-  if (list === '') {
+  if (authData.loading) {
     return (
-      <div>
-        <h1>Loading...</h1>
-      </div>
+      <h1 className="text-center">loading</h1>
     );
   }
   if (Object.keys(list).length === 0) {
