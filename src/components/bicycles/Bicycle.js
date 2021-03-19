@@ -27,14 +27,12 @@ const Bicycle = ({ authData }) => {
 
   if (!count) {
     if (authData.user.id) {
-      console.log(1, favValue);
       setCount(1);
       axios.get(`http://localhost:5000/api/v1/users/${authData.user.id}/favourites/${id}`)
         .then(response => {
           if (response.data.status) {
             setFavValue('fas fa-star');
           }
-          console.log(2, favValue, response.data.status);
         });
     }
   }

@@ -10,7 +10,6 @@ const UserFavorites = () => {
   useEffect(() => {
     axios.get(`http://localhost:5000/api/v1/users/${id}/favourites`)
       .then(response => {
-        console.log(response.data);
         setFavorites(response.data);
       });
   }, []);
