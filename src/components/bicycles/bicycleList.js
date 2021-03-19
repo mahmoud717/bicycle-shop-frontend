@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 export default function BicycleList({ authData }) {
   const [list, changeList] = useState('');
   useEffect(() => {
-    axios.get('https://bicycle-shop-backend.herokuapp.com/api/v1/bicycles')
+    axios.get('http://localhost:5000/api/v1/bicycles')
       .then(response => {
         if (response.data) {
           changeList(response.data.bicycles);

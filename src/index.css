@@ -239,6 +239,20 @@ input:focus {
   margin: 20px 0;
 }
 
+.star {
+  color: gold;
+}
+
+.star-btn {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+}
+
+.star-btn:focus {
+  box-shadow: none !important;
+}
+
 @media (min-width: 768px) {
   .bicycle-container-image {
     width: 40vw !important;

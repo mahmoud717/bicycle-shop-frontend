@@ -8,8 +8,9 @@ const UserFavorites = () => {
   //   const history = useHistory();
   const [favorites, setFavorites] = useState([]);
   useEffect(() => {
-    axios.get(`localhost:5000/api/v1/users/${id}/favorites`)
+    axios.get(`http://localhost:5000/api/v1/users/${id}/favourites`)
       .then(response => {
+        console.log(response.data);
         setFavorites(response.data);
       });
   }, []);

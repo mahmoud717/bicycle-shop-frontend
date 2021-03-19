@@ -29,7 +29,7 @@ import UserFavorites from './users/UserFavourites';
 
 function App({ authData, changeLoggedUser }) {
   useEffect(() => {
-    axios.get('https://bicycle-shop-backend.herokuapp.com/api/v1/sessions/logged_in', {
+    axios.get('http://localhost:5000/api/v1/sessions/logged_in', {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `bearer ${localStorage.getItem('token')}`,
