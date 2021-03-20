@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`404 Component renders the title text of the 404 Component 1`] = `ShallowWrapper {}`;

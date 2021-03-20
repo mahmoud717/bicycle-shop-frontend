@@ -42,7 +42,7 @@ const Signup = ({ authData, changeLoggedUser }) => {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center form-container container pb-4">
+    <div className="d-flex justify-content-center align-items-center form-container container pb-4 signup">
       <form onSubmit={handleSubmit} className="login-form d-flex flex-column text-center mb-5">
         <h2 className="text-white">Signup</h2>
         <div className="text-white">{error}</div>

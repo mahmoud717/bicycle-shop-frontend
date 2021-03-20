@@ -47,7 +47,7 @@ const AddOptions = ({ authData }) => {
   }, []);
 
   return (
-    <div className="container">
+    <div className="container add-options">
       <h2 className="text-center my-4">Current options</h2>
 
       <ul className="list-group">

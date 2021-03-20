@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Component renders the login-access class 1`] = `ShallowWrapper {}`;
+
+exports[`App Component renders the page 1`] = `ShallowWrapper {}`;
+
+exports[`App Component renders the the route-trackings class 1`] = `ShallowWrapper {}`;

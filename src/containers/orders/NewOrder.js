@@ -101,7 +101,7 @@ const NewOrder = ({ authData, changeUserOrders }) => {
 
   return (
 
-    <div className="container-fluid p-3">
+    <div className="container-fluid p-3 new-order">
       <div className="bicycle-container container d-flex flex-column justify-content-center align-items-center">
         <div className="bicycle-container-image">
           <div className="bicycle-container-model btn btn-outline-primary">{bicycle.model}</div>

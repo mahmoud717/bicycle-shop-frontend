@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 const Option = ({
   option, onClick, originalOptions,
 }) => (
-  <div key={option.id}>
+  <div key={option.id} className="option">
     <label name={option.name} id={option.id}>{option.value}</label>
     <input type="radio" onChange={() => { onClick(option.level + 1, option.id, originalOptions); }} name={option.name} value={option.value} required />
   </div>

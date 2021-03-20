@@ -27,7 +27,7 @@ const UserFavorites = () => {
     );
   }
   return (
-    <div className="container-fluid order-card-container d-flex flex-column justify-content-center align-items-center">
+    <div className="container-fluid user-favourites order-card-container d-flex flex-column justify-content-center align-items-center">
       {favorites.map(bike => (
         <Link to={`/bicycles/${bike.id}`} key={bike.id}>
           <div className="order-card d-flex">
