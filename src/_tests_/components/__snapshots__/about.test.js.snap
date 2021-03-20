@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`About Component renders the title text of the About Component 1`] = `ShallowWrapper {}`;

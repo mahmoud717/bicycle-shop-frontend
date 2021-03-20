@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home Component renders the title text of the Home Component 1`] = `ShallowWrapper {}`;
+
+exports[`Home Component renders the title text of the Home Component 2`] = `ShallowWrapper {}`;

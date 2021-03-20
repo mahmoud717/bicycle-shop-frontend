@@ -19,7 +19,7 @@ const Logout = ({ changeLoggedUser }) => {
       history.pushState('/404');
     });
   return (
-    <div className="my-5 py-5 text-center">
+    <div className="my-5 py-5 text-center logout">
       <h1>
         logging out
       </h1>

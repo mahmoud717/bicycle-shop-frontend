@@ -121,7 +121,6 @@ const Bicycle = ({ authData }) => {
 
 Bicycle.propTypes = {
   authData: PropTypes.object.isRequired,
-
 };
 
 export default Bicycle;

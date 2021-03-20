@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`User Component renders the User container 1`] = `ShallowWrapper {}`;

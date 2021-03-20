@@ -9,7 +9,7 @@ export default function OptionFieldset({
   name, options, onClick, originalOptions,
 }) {
   return (
-    <fieldset name={name} className={name} required>
+    <fieldset name={name} className={`${name} option-fieldset`} required>
       <legend>{name}</legend>
       {options.map(option => (
         <Option key={option.id + option.name} option={option} onClick={onClick} originalOptions={originalOptions} />
