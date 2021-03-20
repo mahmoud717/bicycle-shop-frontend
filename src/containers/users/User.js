@@ -1,9 +1,10 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable no-alert */
-/* eslint-disable no-undef */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable max-len */
-/* eslint-disable react/prop-types */
+
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
@@ -86,4 +87,8 @@ const mapDispatchToProps = dispatch => ({
   (user, loggedIn, userOrders, loading) => dispatch(changeLoggedUser(user, loggedIn, userOrders, loading)),
 });
 
+User.propTypes = {
+  authData: PropTypes.object.isRequired,
+  changeLoggedUser: PropTypes.func.isRequired,
+};
 export default connect(null, mapDispatchToProps)(User);

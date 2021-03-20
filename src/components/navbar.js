@@ -1,5 +1,5 @@
-/* eslint-disable no-unused-expressions */
 /* eslint-disable react/prop-types */
+/* eslint-disable no-unused-expressions */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Link } from 'react-router-dom';
 

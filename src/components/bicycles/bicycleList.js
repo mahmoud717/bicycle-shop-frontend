@@ -1,11 +1,12 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/jsx-key */
 import React, { useEffect, useState } from 'react';
 
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-export default function BicycleList({ authData }) {
+const BicycleList = ({ authData }) => {
   const history = useHistory();
   const [list, changeList] = useState('');
   useEffect(() => {
@@ -55,4 +56,11 @@ export default function BicycleList({ authData }) {
 
     </div>
   );
-}
+};
+
+BicycleList.propTypes = {
+  authData: PropTypes.object.isRequired,
+
+};
+
+export default BicycleList;

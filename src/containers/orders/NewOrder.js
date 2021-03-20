@@ -1,5 +1,5 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable prefer-const */
-/* eslint-disable react/prop-types */
 /* eslint-disable array-callback-return */
 /* eslint-disable max-len */
 /* eslint-disable consistent-return */
@@ -7,6 +7,7 @@
 import { useParams, useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import OptionFieldset from '../../components/orders/OptionFieldset';
 import changeUserOrders from '../../redux/actions/order_actions';
@@ -125,4 +126,9 @@ const NewOrder = ({ authData, changeUserOrders }) => {
 const mapDispatchToProps = dispatch => ({
   changeUserOrders: orders => dispatch(changeUserOrders(orders)),
 });
+
+NewOrder.propTypes = {
+  authData: PropTypes.object.isRequired,
+  changeUserOrders: PropTypes.func.isRequired,
+};
 export default connect(null, mapDispatchToProps)(NewOrder);

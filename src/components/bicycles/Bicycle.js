@@ -1,9 +1,11 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable no-alert */
 /* eslint-disable no-restricted-globals */
-/* eslint-disable react/prop-types */
+
 import { useParams, useHistory, Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 const Bicycle = ({ authData }) => {
   const history = useHistory();
@@ -115,6 +117,11 @@ const Bicycle = ({ authData }) => {
     </div>
 
   );
+};
+
+Bicycle.propTypes = {
+  authData: PropTypes.object.isRequired,
+
 };
 
 export default Bicycle;

@@ -1,13 +1,13 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable max-len */
-/* eslint-disable no-console */
-/* eslint-disable react/prop-types */
+
 import {
   BrowserRouter, Route, Switch,
 } from 'react-router-dom';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-
+import PropTypes from 'prop-types';
 import changeLoggedUser from '../redux/actions/auth_actions';
 import About from '../components/about';
 import Navbar from '../components/navbar';
@@ -38,12 +38,8 @@ function App({ authData, changeLoggedUser }) {
       .then(response => {
         if (response.data) {
           changeLoggedUser(response.data.user, response.data.logged_in, response.data.orders, false);
-          console.log(response.data);
         }
       });
-    // .catch(error => {
-    //   console.error(error);
-    // });
   }, []);
 
   return (
@@ -61,7 +57,7 @@ function App({ authData, changeLoggedUser }) {
             <Signup authData={authData} />
           </Route>
           <Route exact path="/">
-            <Home authData={authData} />
+            <Home />
           </Route>
           <Route exact path="/bicycles">
             <BicycleList authData={authData} />
@@ -70,7 +66,7 @@ function App({ authData, changeLoggedUser }) {
             <Logout authData={authData} />
           </Route>
           <Route exact path="/about">
-            <About authData={authData} />
+            <About />
           </Route>
 
           <Route exact path="/bicycles/create">
@@ -96,7 +92,7 @@ function App({ authData, changeLoggedUser }) {
           </Route>
 
           <Route exact path="*">
-            <NotFound authData={authData} />
+            <NotFound />
           </Route>
 
         </Switch>
@@ -115,4 +111,9 @@ const mapDispatchToProps = dispatch => ({
   changeLoggedUser:
   (user, loggedIn, userOrders, loading) => dispatch(changeLoggedUser(user, loggedIn, userOrders, loading)),
 });
+
+App.propTypes = {
+  changeLoggedUser: PropTypes.func.isRequired,
+  authData: PropTypes.object.isRequired,
+};
 export default connect(mapStateToProps, mapDispatchToProps)(App);

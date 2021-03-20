@@ -1,15 +1,23 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable react/prop-types */
+
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default function Option({
+const Option = ({
   option, onClick, originalOptions,
-}) {
-  return (
-    <div key={option.id}>
-      <label name={option.name} id={option.id}>{option.value}</label>
-      <input type="radio" onChange={() => { onClick(option.level + 1, option.id, originalOptions); }} name={option.name} value={option.value} required />
-    </div>
+}) => (
+  <div key={option.id}>
+    <label name={option.name} id={option.id}>{option.value}</label>
+    <input type="radio" onChange={() => { onClick(option.level + 1, option.id, originalOptions); }} name={option.name} value={option.value} required />
+  </div>
 
-  );
-}
+);
+
+Option.propTypes = {
+  option: PropTypes.object.isRequired,
+  onClick: PropTypes.func.isRequired,
+  originalOptions: PropTypes.array.isRequired,
+};
+
+export default Option;

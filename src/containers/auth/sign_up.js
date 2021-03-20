@@ -1,9 +1,10 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import axios from 'axios';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import changeLoggedUser from '../../redux/actions/auth_actions';
 
 const Signup = ({ authData, changeLoggedUser }) => {
@@ -82,4 +83,9 @@ const mapDispatchToProps = dispatch => ({
   changeLoggedUser:
     (user, loggedIn, userOrders) => dispatch(changeLoggedUser(user, loggedIn, userOrders)),
 });
+
+Signup.propTypes = {
+  changeLoggedUser: PropTypes.func.isRequired,
+  authData: PropTypes.object.isRequired,
+};
 export default connect(null, mapDispatchToProps)(Signup);

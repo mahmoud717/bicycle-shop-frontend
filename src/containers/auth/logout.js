@@ -1,8 +1,8 @@
-/* eslint-disable react/prop-types */
 import axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import changeLoggedUser from '../../redux/actions/auth_actions';
 
 const Logout = ({ changeLoggedUser }) => {
@@ -31,4 +31,8 @@ const mapDispatchToProps = dispatch => ({
   changeLoggedUser:
     (user, loggedIn, userOrders) => dispatch(changeLoggedUser(user, loggedIn, userOrders)),
 });
+
+Logout.propTypes = {
+  changeLoggedUser: PropTypes.func.isRequired,
+};
 export default connect(null, mapDispatchToProps)(Logout);
