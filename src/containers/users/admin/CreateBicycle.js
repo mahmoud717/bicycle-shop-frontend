@@ -20,6 +20,9 @@ const CreateBicycle = () => {
     })
       .then(response => {
         !response.data.status && history.push(`/bicycles/${response.data.id}`);
+      })
+      .catch(() => {
+        history.pushState('/404');
       });
   };
   return (

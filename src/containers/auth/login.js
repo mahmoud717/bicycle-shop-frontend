@@ -29,10 +29,10 @@ const Login = ({ authData, changeLoggedUser }) => {
           localStorage.setItem('token', response.data.token);
           history.push('/');
         }
+      })
+      .catch(() => {
+        history.pushState('/404');
       });
-    // .catch(error => {
-    //   console.log(error);
-    // });
   };
 
   return (

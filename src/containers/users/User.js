@@ -35,6 +35,9 @@ const User = ({ authData, changeLoggedUser }) => {
             localStorage.clear();
             history.push('/');
           }
+        })
+        .catch(() => {
+          history.pushState('/404');
         });
     }
   };

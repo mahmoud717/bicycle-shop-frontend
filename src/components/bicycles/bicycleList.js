@@ -3,9 +3,10 @@
 import React, { useEffect, useState } from 'react';
 
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 export default function BicycleList({ authData }) {
+  const history = useHistory();
   const [list, changeList] = useState('');
   useEffect(() => {
     axios.get('https://bicycle-shop-backend.herokuapp.com/api/v1/bicycles')
@@ -13,17 +14,17 @@ export default function BicycleList({ authData }) {
         if (response.data) {
           changeList(response.data.bicycles);
         }
+      })
+      .catch(() => {
+        history.pushState('/404');
       });
-    // .catch(error => {
-    //   console.error(error);
-    // });
   }, []);
   if (authData.loading) {
     return (
       <h1 className="text-center">loading</h1>
     );
   }
-  if (Object.keys(list).length === 0) {
+  if (!authData.loading && Object.keys(list).length === 0) {
     return (
       <div className="text-center mt-5 pt-5">
         <h1 className="mt-5">There are no bikes at the moment, please come back later.</h1>

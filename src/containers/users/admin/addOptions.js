@@ -29,12 +29,18 @@ const AddOptions = ({ authData }) => {
       .then(response => {
         !response.data.status && history.push(`/bicycles/${id}`);
         response.data.options && setOptions(response.data.options);
+      })
+      .catch(() => {
+        history.pushState('/404');
       });
   };
   useEffect(() => {
     axios.get(`https://bicycle-shop-backend.herokuapp.com/api/v1/bicycles/${id}/options`)
       .then(response => {
         setOptions(response.data);
+      })
+      .catch(() => {
+        history.pushState('/404');
       });
   }, []);
 

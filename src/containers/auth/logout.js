@@ -14,10 +14,10 @@ const Logout = ({ changeLoggedUser }) => {
         localStorage.clear();
         history.push('/');
       }
+    })
+    .catch(() => {
+      history.pushState('/404');
     });
-  // .catch(error => {
-  //   console.log(error);
-  // });
   return (
     <div className="my-5 py-5 text-center">
       <h1>

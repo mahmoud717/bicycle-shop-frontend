@@ -1,19 +1,27 @@
 /* eslint-disable array-callback-return */
 import { React, useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 const UserFavorites = () => {
   const { id } = useParams();
-  //   const history = useHistory();
+  const history = useHistory();
   const [favorites, setFavorites] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     axios.get(`https://bicycle-shop-backend.herokuapp.com/api/v1/users/${id}/favourites`)
       .then(response => {
         setFavorites(response.data);
+        setLoading(true);
+      })
+      .catch(() => {
+        history.pushState('/404');
       });
   }, []);
-  if (!favorites.length) {
+  if (loading) {
+    <h1 className="text-center mt-5">loading</h1>;
+  }
+  if (!loading && !favorites.length) {
     return (
       <h1 className="text-center mt-5">There are no favourites</h1>
     );

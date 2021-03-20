@@ -49,8 +49,8 @@ const NewOrder = ({ authData, changeUserOrders }) => {
           addOptions(1, null, response.data.options);
         }
       })
-      .then(() => {
-
+      .catch(() => {
+        history.pushState('/404');
       });
   }, []);
 
@@ -92,6 +92,9 @@ const NewOrder = ({ authData, changeUserOrders }) => {
           changeUserOrders(response.data.orders);
           history.push('/orders/success');
         }
+      })
+      .catch(() => {
+        history.pushState('/404');
       });
   };
 

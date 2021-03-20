@@ -2,11 +2,21 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const UserOrders = ({ authData }) => {
   if (authData.loading) {
     return (
       <h1 className="text-center">loading</h1>
+    );
+  }
+  if (!authData.loading && !authData.userOrders.length) {
+    return (
+      <div className="text-center mt-5 pt-5">
+        <h1 className="mt-5">There are no bikes at the moment, please come back later.</h1>
+        {authData.user.admin === true ? <Link to="/bicycles/create" className="btn btn-success mt-5">Add product</Link> : ''}
+      </div>
+
     );
   }
   return (
