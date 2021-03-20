@@ -1,3 +1,6 @@
+# bicycle-shop
+
+
 This is the front-end part of my bicycle shop project
 
 - Props and States,
