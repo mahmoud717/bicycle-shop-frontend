@@ -1,5 +1,5 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable prefer-const */
-/* eslint-disable react/prop-types */
 /* eslint-disable array-callback-return */
 /* eslint-disable max-len */
 /* eslint-disable consistent-return */
@@ -7,6 +7,7 @@
 import { useParams, useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import OptionFieldset from '../../components/orders/OptionFieldset';
 import changeUserOrders from '../../redux/actions/order_actions';
@@ -41,7 +42,7 @@ const NewOrder = ({ authData, changeUserOrders }) => {
 
   // fetching bike data
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/v1/bicycles/${id}`)
+    axios.get(`https://bicycle-shop-backend.herokuapp.com/api/v1/bicycles/${id}`)
       .then(response => {
         if (response.data) {
           setBicycle(response.data.bicycle);
@@ -49,8 +50,8 @@ const NewOrder = ({ authData, changeUserOrders }) => {
           addOptions(1, null, response.data.options);
         }
       })
-      .then(() => {
-
+      .catch(() => {
+        history.pushState('/404');
       });
   }, []);
 
@@ -78,7 +79,7 @@ const NewOrder = ({ authData, changeUserOrders }) => {
 
     axios({
       method: 'post',
-      url: 'http://localhost:5000/api/v1/orders',
+      url: 'https://bicycle-shop-backend.herokuapp.com/api/v1/orders',
       data: {
         user_id: authData.user.id,
         bicycle_id: id,
@@ -92,6 +93,9 @@ const NewOrder = ({ authData, changeUserOrders }) => {
           changeUserOrders(response.data.orders);
           history.push('/orders/success');
         }
+      })
+      .catch(() => {
+        history.pushState('/404');
       });
   };
 
@@ -122,4 +126,9 @@ const NewOrder = ({ authData, changeUserOrders }) => {
 const mapDispatchToProps = dispatch => ({
   changeUserOrders: orders => dispatch(changeUserOrders(orders)),
 });
+
+NewOrder.propTypes = {
+  authData: PropTypes.object.isRequired,
+  changeUserOrders: PropTypes.func.isRequired,
+};
 export default connect(null, mapDispatchToProps)(NewOrder);

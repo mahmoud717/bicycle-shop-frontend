@@ -1,12 +1,14 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable no-alert */
-/* eslint-disable no-undef */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable max-len */
-/* eslint-disable react/prop-types */
+
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import changeLoggedUser from '../../redux/actions/auth_actions';
 
 const User = ({ authData, changeLoggedUser }) => {
   const history = useHistory();
@@ -22,7 +24,7 @@ const User = ({ authData, changeLoggedUser }) => {
   const handelDeletion = e => {
     e.preventDefault();
     if (confirm('Are you sure you want to delete this Account?')) {
-      axios.delete(`http://localhost:5000/api/v1/users/${authData.user.id}`, {
+      axios.delete(`https://bicycle-shop-backend.herokuapp.com/api/v1/users/${authData.user.id}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `bearer ${localStorage.getItem('token')}`,
@@ -34,9 +36,19 @@ const User = ({ authData, changeLoggedUser }) => {
             localStorage.clear();
             history.push('/');
           }
+        })
+        .catch(() => {
+          history.pushState('/404');
         });
     }
   };
+
+  if (authData.loading) {
+    return (
+      <h1 className="text-center">loading</h1>
+    );
+  }
+
   return (
     <div className="user-container container my-5">
       <div className="user-info d-flex justify-content-center align-items-center flex-column">
@@ -54,6 +66,9 @@ const User = ({ authData, changeLoggedUser }) => {
           <button type="button" className="btn btn-primary m-3" onClick={handleClick}>
             orders
           </button>
+          <Link to={`/users/${authData.user.id}/favorites`} className="btn btn-warning text-white">
+            favorites
+          </Link>
           {authData.user.admin === true ? <Link to="/bicycles/create" className="btn btn-success m-3">Add product</Link> : ''}
 
         </div>
@@ -72,4 +87,8 @@ const mapDispatchToProps = dispatch => ({
   (user, loggedIn, userOrders, loading) => dispatch(changeLoggedUser(user, loggedIn, userOrders, loading)),
 });
 
+User.propTypes = {
+  authData: PropTypes.object.isRequired,
+  changeLoggedUser: PropTypes.func.isRequired,
+};
 export default connect(null, mapDispatchToProps)(User);

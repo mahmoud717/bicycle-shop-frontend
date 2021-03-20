@@ -1,13 +1,13 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable max-len */
-/* eslint-disable no-console */
-/* eslint-disable react/prop-types */
+
 import {
   BrowserRouter, Route, Switch,
 } from 'react-router-dom';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-
+import PropTypes from 'prop-types';
 import changeLoggedUser from '../redux/actions/auth_actions';
 import About from '../components/about';
 import Navbar from '../components/navbar';
@@ -25,10 +25,11 @@ import User from './users/User';
 import UserOrders from './users/UserOrders';
 import CreateBicycle from './users/admin/CreateBicycle';
 import AddOptions from './users/admin/addOptions';
+import UserFavorites from './users/UserFavourites';
 
 function App({ authData, changeLoggedUser }) {
   useEffect(() => {
-    axios.get('http://localhost:5000/api/v1/sessions/logged_in', {
+    axios.get('https://bicycle-shop-backend.herokuapp.com/api/v1/sessions/logged_in', {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `bearer ${localStorage.getItem('token')}`,
@@ -37,11 +38,7 @@ function App({ authData, changeLoggedUser }) {
       .then(response => {
         if (response.data) {
           changeLoggedUser(response.data.user, response.data.logged_in, response.data.orders, false);
-          console.log(response.data);
         }
-      })
-      .catch(error => {
-        console.error(error);
       });
   }, []);
 
@@ -60,7 +57,7 @@ function App({ authData, changeLoggedUser }) {
             <Signup authData={authData} />
           </Route>
           <Route exact path="/">
-            <Home authData={authData} />
+            <Home />
           </Route>
           <Route exact path="/bicycles">
             <BicycleList authData={authData} />
@@ -69,7 +66,7 @@ function App({ authData, changeLoggedUser }) {
             <Logout authData={authData} />
           </Route>
           <Route exact path="/about">
-            <About authData={authData} />
+            <About />
           </Route>
 
           <Route exact path="/bicycles/create">
@@ -90,8 +87,12 @@ function App({ authData, changeLoggedUser }) {
           <Route exact path="/users/:id/orders">
             <UserOrders authData={authData} />
           </Route>
+          <Route exact path="/users/:id/favorites">
+            <UserFavorites authData={authData} />
+          </Route>
+
           <Route exact path="*">
-            <NotFound authData={authData} />
+            <NotFound />
           </Route>
 
         </Switch>
@@ -110,4 +111,9 @@ const mapDispatchToProps = dispatch => ({
   changeLoggedUser:
   (user, loggedIn, userOrders, loading) => dispatch(changeLoggedUser(user, loggedIn, userOrders, loading)),
 });
+
+App.propTypes = {
+  changeLoggedUser: PropTypes.func.isRequired,
+  authData: PropTypes.object.isRequired,
+};
 export default connect(mapStateToProps, mapDispatchToProps)(App);

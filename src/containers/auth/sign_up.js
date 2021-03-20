@@ -1,9 +1,10 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import axios from 'axios';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import changeLoggedUser from '../../redux/actions/auth_actions';
 
 const Signup = ({ authData, changeLoggedUser }) => {
@@ -12,13 +13,14 @@ const Signup = ({ authData, changeLoggedUser }) => {
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [error, setError] = useState(null);
   const history = useHistory();
   if (authData.loggedIn === true) {
     history.push('/');
   }
   const handleSubmit = e => {
     e.preventDefault();
-    axios.post('http://localhost:5000/api/v1/users', {
+    axios.post('https://bicycle-shop-backend.herokuapp.com/api/v1/users', {
       name,
       password,
       email,
@@ -27,15 +29,15 @@ const Signup = ({ authData, changeLoggedUser }) => {
     })
       .then(response => {
         if (response.data.status === 'error') {
-          /// handleError()
+          setError(response.data.message[0]);
         } else {
           changeLoggedUser(response.data.user, true, []);
           localStorage.setItem('token', response.data.token);
           history.push('/');
         }
       })
-      .catch(error => {
-        console.log(error);
+      .catch(() => {
+        history.pushState('/404');
       });
   };
 
@@ -43,6 +45,7 @@ const Signup = ({ authData, changeLoggedUser }) => {
     <div className="d-flex justify-content-center align-items-center form-container container pb-4">
       <form onSubmit={handleSubmit} className="login-form d-flex flex-column text-center mb-5">
         <h2 className="text-white">Signup</h2>
+        <div className="text-white">{error}</div>
         <div className="form-input-material d-flex flex-column align-items-start">
           <label htmlFor="name">Name</label>
           <input type="text" id="name" name="name" className="form-control-material w-100" autoComplete="off" value={name} onChange={e => { setName(e.target.value); }} required placeholder="Name" />
@@ -65,6 +68,7 @@ const Signup = ({ authData, changeLoggedUser }) => {
           <label htmlFor="imageUrl">Image URL</label>
           <input type="text" id="imageUrl" name="imageUrl" className="form-control-material w-100" value={imageUrl} onChange={e => { setImageUrl(e.target.value); }} placeholder="Image URL" />
         </div>
+
         <button className="btn btn-primary btn-ghost" type="submit">Signup</button>
         <Link to="/login" className="mt-3">
           Login?
@@ -79,4 +83,9 @@ const mapDispatchToProps = dispatch => ({
   changeLoggedUser:
     (user, loggedIn, userOrders) => dispatch(changeLoggedUser(user, loggedIn, userOrders)),
 });
+
+Signup.propTypes = {
+  changeLoggedUser: PropTypes.func.isRequired,
+  authData: PropTypes.object.isRequired,
+};
 export default connect(null, mapDispatchToProps)(Signup);

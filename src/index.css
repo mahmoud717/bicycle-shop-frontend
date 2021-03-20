@@ -230,12 +230,27 @@ input:focus {
 }
 
 .bicycle-form {
-  min-width: 800px;
+  padding: 20px;
+  max-width: 800px;
   margin-top: 70px;
 }
 
 .bicycle-form > div {
   margin: 20px 0;
+}
+
+.star {
+  color: gold;
+}
+
+.star-btn {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+}
+
+.star-btn:focus {
+  box-shadow: none !important;
 }
 
 @media (min-width: 768px) {

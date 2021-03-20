@@ -1,13 +1,13 @@
-/* eslint-disable react/prop-types */
 import axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import changeLoggedUser from '../../redux/actions/auth_actions';
 
 const Logout = ({ changeLoggedUser }) => {
   const history = useHistory();
-  axios.delete('http://localhost:5000/api/v1/sessions/logout')
+  axios.delete('https://bicycle-shop-backend.herokuapp.com/api/v1/sessions/logout')
     .then(response => {
       if (response.data) {
         changeLoggedUser({}, false, {});
@@ -15,8 +15,8 @@ const Logout = ({ changeLoggedUser }) => {
         history.push('/');
       }
     })
-    .catch(error => {
-      console.log(error);
+    .catch(() => {
+      history.pushState('/404');
     });
   return (
     <div className="my-5 py-5 text-center">
@@ -31,4 +31,8 @@ const mapDispatchToProps = dispatch => ({
   changeLoggedUser:
     (user, loggedIn, userOrders) => dispatch(changeLoggedUser(user, loggedIn, userOrders)),
 });
+
+Logout.propTypes = {
+  changeLoggedUser: PropTypes.func.isRequired,
+};
 export default connect(null, mapDispatchToProps)(Logout);

@@ -1,12 +1,10 @@
-/* eslint-disable react/jsx-key */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable array-callback-return */
-/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable max-len */
-/* eslint-disable react/prop-types */
+
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 const AddOptions = ({ authData }) => {
   const { id } = useParams();
@@ -20,21 +18,31 @@ const AddOptions = ({ authData }) => {
   }
   const handleSubmit = e => {
     e.preventDefault();
-    axios.post(`http://localhost:5000/api/v1/bicycles/${id}/createOption`, {
+    axios.post(`https://bicycle-shop-backend.herokuapp.com/api/v1/bicycles/${id}/createOption`, {
       name,
       value,
       parent_id: parentId,
       bicycle_id: id,
     })
       .then(response => {
-        !response.data.status && history.push(`/bicycles/${id}`);
-        response.data.options && setOptions(response.data.options);
+        if (!response.data.status) {
+          history.push(`/bicycles/${id}`);
+        }
+        if (response.data.options) {
+          setOptions(response.data.options);
+        }
+      })
+      .catch(() => {
+        history.pushState('/404');
       });
   };
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/v1/bicycles/${id}/options`)
+    axios.get(`https://bicycle-shop-backend.herokuapp.com/api/v1/bicycles/${id}/options`)
       .then(response => {
         setOptions(response.data);
+      })
+      .catch(() => {
+        history.pushState('/404');
       });
   }, []);
 
@@ -45,7 +53,7 @@ const AddOptions = ({ authData }) => {
       <ul className="list-group">
         { options.map(option => (
 
-          <li className="list-group-item">
+          <li className="list-group-item" key={option.name + option.value}>
             <span>
               option_name:
               {' '}
@@ -78,7 +86,7 @@ const AddOptions = ({ authData }) => {
       </ul>
       <form className="option-form mb-5" onSubmit={handleSubmit}>
         <h2 className="text-center my-4">Add option</h2>
-        <div className="form-group">
+        <div className="form-group exampleFormControlInput1 ">
           <label htmlFor="exampleFormControlInput1">Name</label>
           <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="Option Name" value={name} onChange={e => setName(e.target.value)} required />
         </div>
@@ -92,7 +100,7 @@ const AddOptions = ({ authData }) => {
             <option disabled selected value="">Parent</option>
             <option value={null}>No parent / level 1 option</option>
             {options.map(option => (
-              <option id={option.id}>
+              <option key={option.id} id={option.id}>
                 {option.name}
                 :
                 {' '}
@@ -117,4 +125,7 @@ const AddOptions = ({ authData }) => {
   );
 };
 
+AddOptions.propTypes = {
+  authData: PropTypes.object.isRequired,
+};
 export default AddOptions;

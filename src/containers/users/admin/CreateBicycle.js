@@ -12,7 +12,7 @@ const CreateBicycle = () => {
   const [description, setDescription] = useState('');
   const handleSubmit = e => {
     e.preventDefault();
-    axios.post('http://localhost:5000/api/v1/bicycles', {
+    axios.post('https://bicycle-shop-backend.herokuapp.com/api/v1/bicycles', {
       name,
       model,
       image_url: image,
@@ -20,13 +20,16 @@ const CreateBicycle = () => {
     })
       .then(response => {
         !response.data.status && history.push(`/bicycles/${response.data.id}`);
+      })
+      .catch(() => {
+        history.pushState('/404');
       });
   };
   return (
-    <div className="bicycle-form-container d-flex justify-content-center align-items-center">
-      <form className="bicycle-form" onSubmit={handleSubmit}>
+    <div className="bicycle-form-container d-flex justify-content-center w-100 align-items-center">
+      <form className="bicycle-form w-100" onSubmit={handleSubmit}>
         <h1 className="text-center">Create Bicycle</h1>
-        <div className="form-group">
+        <div className="form-group w-100">
           <label htmlFor="exampleFormControlInput1">Name</label>
           <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="Product Name" value={name} onChange={e => setName(e.target.value)} required />
         </div>

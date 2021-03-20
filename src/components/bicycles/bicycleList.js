@@ -1,31 +1,31 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/jsx-key */
 import React, { useEffect, useState } from 'react';
 
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-export default function BicycleList({ authData }) {
+const BicycleList = ({ authData }) => {
+  const history = useHistory();
   const [list, changeList] = useState('');
   useEffect(() => {
-    axios.get('http://localhost:5000/api/v1/bicycles')
+    axios.get('https://bicycle-shop-backend.herokuapp.com/api/v1/bicycles')
       .then(response => {
         if (response.data) {
           changeList(response.data.bicycles);
         }
       })
-      .catch(error => {
-        console.error(error);
+      .catch(() => {
+        history.pushState('/404');
       });
   }, []);
-  if (list === '') {
+  if (authData.loading) {
     return (
-      <div>
-        <h1>Loading...</h1>
-      </div>
+      <h1 className="text-center">loading</h1>
     );
   }
-  if (Object.keys(list).length === 0) {
+  if (!authData.loading && Object.keys(list).length === 0) {
     return (
       <div className="text-center mt-5 pt-5">
         <h1 className="mt-5">There are no bikes at the moment, please come back later.</h1>
@@ -56,4 +56,11 @@ export default function BicycleList({ authData }) {
 
     </div>
   );
-}
+};
+
+BicycleList.propTypes = {
+  authData: PropTypes.object.isRequired,
+
+};
+
+export default BicycleList;
