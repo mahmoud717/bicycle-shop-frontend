@@ -33,7 +33,7 @@ const AddOptions = ({ authData }) => {
         }
       })
       .catch(() => {
-        history.pushState('/404');
+        history.push('/404');
       });
   };
   useEffect(() => {
@@ -42,7 +42,7 @@ const AddOptions = ({ authData }) => {
         setOptions(response.data);
       })
       .catch(() => {
-        history.pushState('/404');
+        history.push('/404');
       });
   }, []);
 

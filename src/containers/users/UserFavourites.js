@@ -15,7 +15,7 @@ const UserFavorites = () => {
         setLoading(true);
       })
       .catch(() => {
-        history.pushState('/404');
+        history.push('/404');
       });
   }, []);
   if (loading) {

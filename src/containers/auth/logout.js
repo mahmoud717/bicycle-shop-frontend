@@ -16,7 +16,7 @@ const Logout = ({ changeLoggedUser }) => {
       }
     })
     .catch(() => {
-      history.pushState('/404');
+      history.push('/404');
     });
   return (
     <div className="my-5 py-5 text-center">

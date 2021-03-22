@@ -51,7 +51,7 @@ const NewOrder = ({ authData, changeUserOrders }) => {
         }
       })
       .catch(() => {
-        history.pushState('/404');
+        history.push('/404');
       });
   }, []);
 
@@ -95,7 +95,7 @@ const NewOrder = ({ authData, changeUserOrders }) => {
         }
       })
       .catch(() => {
-        history.pushState('/404');
+        history.push('/404');
       });
   };
 

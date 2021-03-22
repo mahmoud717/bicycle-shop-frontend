@@ -32,7 +32,7 @@ const Login = ({ authData, changeLoggedUser }) => {
         }
       })
       .catch(() => {
-        history.pushState('/404');
+        history.push('/404');
       });
   };
 

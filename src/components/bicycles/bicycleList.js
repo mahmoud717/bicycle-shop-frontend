@@ -17,7 +17,7 @@ const BicycleList = ({ authData }) => {
         }
       })
       .catch(() => {
-        history.pushState('/404');
+        history.push('/404');
       });
   }, []);
   if (authData.loading) {
