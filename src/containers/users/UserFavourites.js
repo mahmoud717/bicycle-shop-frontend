@@ -12,7 +12,7 @@ const UserFavorites = () => {
     axios.get(`https://bicycle-shop-backend.herokuapp.com/api/v1/users/${id}/favourites`)
       .then(response => {
         setFavorites(response.data);
-        setLoading(true);
+        setLoading(false);
       })
       .catch(() => {
         history.push('/404');
