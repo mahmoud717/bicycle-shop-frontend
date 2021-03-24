@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# bicycle-shop
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+This is the front-end part of my bicycle shop project
 
-In the project directory, you can run:
+- Props and States,
+- component,
+- Life-cycle methods,
+- Hooks,
+- Routers,
+- Styling the React app,
+- Testing React components.
+- Redux-toolkit.
 
-### `yarn start`
+## `Build-With:`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- React-virtual DOM concepts
+- VScode
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## `Live Demo:`
 
-### `yarn test`
+[netlify](<https://bicycly.netlify.app/>)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[heroku](<https://bicycly-v2.herokuapp.com/>)
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Getting Started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### `Prerequisites`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To get this project up and running locally, "npm install" is needed to be run in order to include all dependencies used for this project.
 
-### `yarn eject`
+**To get this project set up on your local machine, follow these simple steps:**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+1. Open Terminal.
+2. Navigate to your desired location to download the contents of this repository.
+3. Copy and paste the following code into the Terminal: git clone `https://github.com/mahmoud717/bicycle-shop-frontend/tree/bicycle-shop`.
+4. Into the Terminal: run `cd bicycle-shop-frontend`.
+5. Into the Terminal: run `npm install`.
+6. Into the Terminal: run `npm start`.
+7. To see the website in the browser, open browser and load `localhost:3000`.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**To run the test suits:**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+1. Into the Terminal: run `npm test`.
+2. Press `a` to run all tests.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Authors
 
-## Learn More
+👤 **Mahmoud Mohammad**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- GitHub: [@Mahmoud717](https://github.com/mahmoud717)
+- LinkedIn: [Mahmoud-M-Abbas](https://linkedin.com/in/Mahmoud-m-abbas)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## `Show your support:`
 
-### Code Splitting
+Give ⭐ Star me on GitHub — it helps!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 📝 `License`
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is [MIT](lic.url) licensed.

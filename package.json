@@ -6,9 +6,24 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "axios": "^0.21.1",
+    "bootstrap": "^4.6.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "history": "^5.0.0",
+    "jquery": "^3.6.0",
+    "popper": "^1.0.1",
+    "popper.js": "^1.16.1",
+    "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-redux": "^7.2.2",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.2",
+    "redux": "^4.0.5",
+    "chai-deep-match": "^1.2.1",
+    "redux-thunk": "^2.3.0",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
@@ -46,6 +61,8 @@
     "stylelint": "^13.3.3",
     "stylelint-config-standard": "^20.0.0",
     "stylelint-csstree-validator": "^1.9.0",
-    "stylelint-scss": "^3.17.2"
+    "stylelint-scss": "^3.17.2",
+    "chai": "^4.2.0",
+    "redux-mock-store": "^1.5.4"
   }
 }

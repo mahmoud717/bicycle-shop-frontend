@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navbar Component renders the title text of the Navbar Component 1`] = `ShallowWrapper {}`;
+
+exports[`Navbar Component renders the title text of the Navbar Component 2`] = `ShallowWrapper {}`;

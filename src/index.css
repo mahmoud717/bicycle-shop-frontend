@@ -1,13 +1,268 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'Roboto',
+    'Oxygen',
+    'Ubuntu',
+    'Cantarell',
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family:
+    source-code-pro,
+    Menlo,
+    Monaco,
+    Consolas,
+    'Courier New',
     monospace;
+}
+
+nav {
+  min-height: 100px;
+  padding: 0 50px;
+  font-family: 'Montserrat', sans-serif;
+  text-decoration: none;
+  border-bottom: solid 1px #e8e8e8;
+  box-shadow: 0 0 60px 0 rgba(0, 0, 0, 0.05);
+}
+
+nav .brand {
+  font-weight: bold !important;
+  font-size: 30px;
+}
+
+nav a {
+  text-decoration: none;
+  color: black;
+  margin-right: 30px;
+  font-size: 20px;
+}
+
+.homepage-text a {
+  margin-bottom: 100px !important;
+  padding: 10px 15px;
+  font-size: 20px;
+}
+
+.bicycle a {
+  text-decoration: none !important;
+}
+
+nav a:hover,
+.nav li a:hover {
+  color: #0d6efd;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.main-image {
+  height: 340px;
+}
+
+.homepage-text {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.homepage-text h1 {
+  font-size: 55px;
+}
+
+.homepage-text p {
+  font-size: 30px;
+}
+
+.not-found img {
+  margin-top: 100px;
+  height: 400px !important;
+}
+
+input:focus {
+  outline: none;
+}
+
+.form-container {
+  padding-top: 50px;
+}
+
+.login-form {
+  min-height: 130px;
+  background-color: #2f3032;
+  padding: 80px 60px;
+  border-radius: 15px;
+  width: 400px;
+}
+
+.login-form label {
+  color: white;
+  margin: 10px 0;
+}
+
+.login-form button {
+  margin-top: 15px;
+}
+
+.login-form input {
+  border-radius: 3px;
+  border: none;
+  padding: 5px;
+}
+
+.bicycle {
+  padding: 40px;
+  height: 100% !important;
+}
+
+.bicycle-card {
+  border: 1px solid rgb(230, 230, 230);
+  border-radius: 7px;
+  padding: 30px;
+  text-align: center;
+  position: relative;
+  height: 100% !important;
+}
+
+.bicycle-card:hover {
+  transform: scale(1.1);
+}
+
+.bicycle-image img {
+  width: 80% !important;
+  margin-bottom: 20px;
+}
+
+.bicycle-name {
+  font-weight: 600;
+}
+
+.bicycle-model {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+}
+
+.bicycle-description {
+  color: #999;
+  word-wrap: break-word;
+}
+
+.bicycle-container-image {
+  margin: 50px 0;
+  position: relative;
+}
+
+.bicycle-container-name {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 40px;
+}
+
+.bicycle-container-description {
+  margin-bottom: 50px;
+}
+
+.bicycle-container-model {
+  position: absolute;
+  top: 20px;
+  left: 0;
+}
+
+.bicycle-container {
+  max-width: 1000px;
+}
+
+#OrderForm {
+  margin-bottom: 200px;
+  text-align: center;
+}
+
+#OrderForm button {
+  margin-top: 40px;
+}
+
+.order-success {
+  margin: 60px;
+  text-align: center;
+}
+
+.user-image {
+  width: 300px;
+  margin-bottom: 40px;
+}
+
+.user-image img {
+  border-radius: 50%;
+}
+
+.user-name {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.order-card {
+  padding: 30px;
+  margin: 20px;
+  border: 1px solid rgba(190, 190, 190, 0.479);
+  border-radius: 5px;
+}
+
+.order-card-name {
+  font-weight: 500;
+}
+
+.order-card-image {
+  width: 130px;
+  margin-right: 40px;
+}
+
+.no-orders {
+  font-size: 30px;
+  font-weight: 500;
+  margin-top: 130px;
+}
+
+.bicycle-form {
+  padding: 20px;
+  max-width: 800px;
+  margin-top: 70px;
+}
+
+.bicycle-form > div {
+  margin: 20px 0;
+}
+
+.star {
+  color: gold;
+}
+
+.star-btn {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+}
+
+.star-btn:focus {
+  box-shadow: none !important;
+}
+
+@media (min-width: 768px) {
+  .bicycle-container-image {
+    width: 40vw !important;
+  }
+
+  .main-image {
+    height: 600px;
+  }
+
+  .homepage-text {
+    margin-left: 70px;
+  }
 }
