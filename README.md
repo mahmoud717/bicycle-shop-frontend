@@ -1,7 +1,8 @@
 # bicycle-shop
 
 
-This is the front-end part of my bicycle shop project
+This is the front-end part of my bicycle shop project.
+
 [Link to the backend part](https://github.com/mahmoud717/bicycle-shop-backend)
 
 - Props and States,
