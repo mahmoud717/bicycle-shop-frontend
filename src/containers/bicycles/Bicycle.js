@@ -1,16 +1,17 @@
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable no-alert */
-/* eslint-disable no-restricted-globals */
 
 import { useParams, useHistory, Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import loadingImg from '../../assets/img/loading.gif';
 
 const Bicycle = ({ authData }) => {
   const history = useHistory();
   const { id } = useParams();
-  const [bicycle, changeBicycle] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [bicycle, changeBicycle] = useState(null);
   const [favValue, setFavValue] = useState('far fa-star');
   const [count, setCount] = useState(0);
   // fetch bike data
@@ -20,6 +21,7 @@ const Bicycle = ({ authData }) => {
       .then(response => {
         if (response.data) {
           changeBicycle(response.data.bicycle);
+          setLoading(false);
         }
       })
       .catch(() => {
@@ -41,7 +43,7 @@ const Bicycle = ({ authData }) => {
 
   const handelDeletion = e => {
     e.preventDefault();
-    if (confirm('Are you sure you want to delete this bike?')) {
+    if (window.confirm('Are you sure you want to delete this bike?')) {
       axios.delete(`https://bicycle-shop-backend.herokuapp.com/api/v1/bicycles/${id}`)
         .then(response => {
           if (response.data.status === 'success') {
@@ -81,9 +83,10 @@ const Bicycle = ({ authData }) => {
         });
     }
   };
-  if (authData.loading) {
+  if (loading) {
     return (
-      <h1 className="text-center">loading</h1>
+      <div className="h-100 w-100 justify-content-center align-items-center text-center mt-5"><img src={loadingImg} alt="loading" /></div>
+
     );
   }
   return (

@@ -5,27 +5,31 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import loadingImg from '../../assets/img/loading.gif';
 
 const BicycleList = ({ authData }) => {
   const history = useHistory();
-  const [list, changeList] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [list, changeList] = useState(null);
   useEffect(() => {
     axios.get('https://bicycle-shop-backend.herokuapp.com/api/v1/bicycles')
       .then(response => {
         if (response.data) {
           changeList(response.data.bicycles);
+          setLoading(false);
         }
       })
       .catch(() => {
         history.pushState('/404');
       });
   }, []);
-  if (authData.loading) {
+  if (loading) {
     return (
-      <h1 className="text-center">loading</h1>
+      <div className="h-100 w-100 justify-content-center align-items-center text-center mt-5"><img src={loadingImg} alt="loading" /></div>
+
     );
   }
-  if (!authData.loading && Object.keys(list).length === 0) {
+  if (!authData.loading && list && Object.keys(list).length === 0) {
     return (
       <div className="text-center mt-5 pt-5">
         <h1 className="mt-5">There are no bikes at the moment, please come back later.</h1>
@@ -37,7 +41,7 @@ const BicycleList = ({ authData }) => {
   return (
     <div className="container bicycle-list-container">
       <div className="bicycle-list d-flex row">
-        {list.map(el => (
+        {list && list.map(el => (
           <div key={el.name} className="bicycle col-lg-4 col-md-6 col-12">
             <Link to={`bicycles/${el.id}`}>
               <div className="bicycle-card d-flex flex-column">
@@ -53,8 +57,9 @@ const BicycleList = ({ authData }) => {
           </div>
         ))}
       </div>
-
+      <div className="d-flex justify-content-center">{authData.user.admin && <Link to="/bicycles/create" className="btn btn-success mt-3 mb-5 text-center">Add product</Link> }</div>
     </div>
+
   );
 };
 
